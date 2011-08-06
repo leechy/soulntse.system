@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<page xmlns:block="http://www.semantic-markup.com/xmlns/block">
+	<block:html-wrapper>
+		<block:slot name="page-title"/>
+		<block:slot name="page-styles"/>
+		<block:slot name="page-scripts"/>
+		<block:slot name="page-content"/>
+	</block:html-wrapper>
+</page>

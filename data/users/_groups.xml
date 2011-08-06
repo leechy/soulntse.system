@@ -1,0 +1,6 @@
+<groups>
+	<group name="guests">Неавторизованные посетители</group>
+	<group name="registered">Зарегистрированные пользователи</group>
+	<group name="editors">Редакторы сайта</group>
+	<group name="admins">Администраторы сайта</group>
+</groups>

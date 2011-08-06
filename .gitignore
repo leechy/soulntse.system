@@ -1,0 +1,6 @@
+cgi-bin
+sessions.dir
+sessions.pag
+CGI-Executables
+.DS_Store
+.htaccess

@@ -1,0 +1,15 @@
+@main[]
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>Генератор хэшей паролей</title>
+	</head>
+	<body>
+		<form>
+			<p>Пароль <input type="text" name="pass" value="$form:pass" /> <input type="submit" value="Сгенерировать" /></p>
+		</form>
+		^if(def $form:pass){
+			<p>Ключ: ^math:crypt[$form:pass;^$apr1^$]</p>
+		}
+	</body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<page
+	xmlns:block="http://www.semantic-markup.com/xmlns/block"
+	parent="/../data/page-templates/common.xml"
+>
+	<block:slot name="page-content">
+		<block:page-centered-wrapper>
+			<block:slot name="min-width">950px</block:slot>
+			<block:slot name="max-width">1400px</block:slot>
+			<block:slot name="block-content"/>
+		</block:page-min-max-width>
+	</block:html-wrapper>
+</page>

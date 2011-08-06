@@ -1,0 +1,51 @@
+@USE
+common.p
+sites.p
+users.p
+
+
+@main[][currentSite;currentUser]
+#  1. site
+$currentSite[^sites::getSite[//$env:SERVER_NAME^if($env:SERVER_PORT != 80){:$env:SERVER_PORT}$request:uri]]
+
+#  2. user & groups
+#$currentUser[^users::getCurrentUser[]]
+
+#  3. site
+$xSites[^xdoc::load[/sites.xml]]
+
+#  4. uri
+$sURI[$form:req]
+
+#  5. page
+$sPageFilePath[/pages/www/${sURI}page.xml]
+^if(-f $sPageFilePath){
+	$oPage[^xdoc::load[$sPageFilePath]]
+	$response:body[<?xml version="1.0" encoding="UTF-8"?>
+		<page>
+			^oPage.string[
+				$.method[xml]
+				$.omit-xml-declaration[yes]
+			]
+			$oUser.sXML
+		</page>
+	] 
+	$response:content-type[
+		$.value[text/xml]
+		$.charset[$response:charset]
+	]
+}
+
+#  5. page-templates
+#  6. page xml transform
+#  7. block calls
+#  8. block xsl transform
+#  9. bem transform
+# 10. output
+==$form:req==
+
+<pre>
+- memory used:   $status:memory.used
+- memory free:   $status:memory.free
+- since compact: $status:memory.ever_allocated_since_compact
+</pre>

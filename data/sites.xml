@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE sites SYSTEM "http://localhost/entities.xml">
+
+<sites>
+	<!-- Сайт матчится по началу урла - хост и путь (если есть, без закрывающего слэша) -->
+	<!-- Если ни один указанный сайт не подходит - показываем сайт (первый), у которого @default -->
+	<site url="//www.semantic-markup.com" default="default">
+		<!-- Пользователь может быть залогинен одновременно в нескольких базах -->
+		<users base="&DATA_DIR;/users/www"/>
+		<users base="&DATA_DIR;/users/admin"/>
+		<!-- Указываем в какой папке от корня (htdocs/www) находятся страницы сайта -->
+		<pages>/pages/www/</pages>
+		<!-- Указываем какие страницы показываются в случае ошибок, пути от <pages> -->
+		<errors>
+			<!-- Если в случае отсутствия прав, мы не должны выдать что такая страница вообще есть,
+			     можем указать 404ю страницу для 401й ошибки -->
+			<error code="401" type="Unauthorized">/404/</error>
+			<error code="404" type="Not Found">/404/</error>
+			<error code="500" type="Internal Server Error">/500/</error>
+		</errors>
+	</site>
+	<site url="//semantic-markup.com">
+		<!-- Если хост должен средиректиться, то указываем параметр <redirect> -->
+		<!-- в случае @uri="keep", то сохраняем и путь до запрашиваемой страницы -->
+		<redirect site="//www.semantic-markup.com" uri="keep"/>
+	</site>
+	<site url="//demo.semantic-markup.com">
+		<!-- Если указан параметр <alias>, то редирект не происходит, но страницы выдаются с другого сайта -->
+		<alias site="//www.semantic-markup.com"/>
+		<!-- Модификаторы, которые работают для всех блоков на конкретном сайте, их может быть несколько,
+		     как уровня блоков, так и меняющие контент -->
+		<modes>
+			<mode name="demo"/>
+			<mode name="colors">inverted</mode>
+		</modes>
+	</site>
+	<site url="//www.semantic-markup.com/admin">
+		<!-- Ограничение доступа на сайт - через польователей -->
+		<users base="&DATA_DIR;/users/admin">
+			<allow>
+				<group name="admin"/>
+			</allow>
+		</users>
+		<modes>
+			<mode name="admin"/>
+		</modes>
+		<pages>/pages/admin/</pages>
+		<errors>
+			<error code="401" type="Unauthorized">/401/</error>
+			<!-- Если есть необходимость показать страницу ошибки с другого сайта, то указываем @site -->
+			<error code="404" type="Not Found" site="http://www.semantic-markup.com">/404/</error>
+			<error code="500" type="Internal Server Error" site="http://www.semantic-markup.com">/500/</error>
+		</errors>
+	</site>
+
+	<!-- Переопределения для локальной разработки -->
+	<site url="//localhost">
+		<alias site="//www.semantic-markup.com"/>
+	</site>
+	<site url="//localhost/admin">
+		<alias site="//www.semantic-markup.com/admin"/>
+	</site>
+</sites>

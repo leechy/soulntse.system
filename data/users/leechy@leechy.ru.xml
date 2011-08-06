@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<user>
+	<name>Андрейка Лечев</name>
+	<login>Leechy</login>
+	<email verified="true">leechy@leechy.ru</email>
+	<password>$apr1$qRl2czbs$hqGEiZEnIsw.tD6FqcaVY0</password>
+	<groups>
+		<group name="registered"/>
+		<group name="admin"/>
+	</groups>
+</user>

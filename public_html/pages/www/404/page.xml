@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE xsl:stylesheet SYSTEM "http://localhost/symbols.ent">
+
+<page xmlns:block="http://www.semantic-markup.com/xmlns/block">
+
+	<block:b-html>
+		<block:slot name="page-title">Error 404</block:slot>
+		<block:slot name="page-content">
+			<h1>Error 404. Page not found</h1>
+		</block:slot>
+	</block:b-html>
+
+</page>
