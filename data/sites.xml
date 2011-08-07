@@ -2,9 +2,10 @@
 <!DOCTYPE sites SYSTEM "http://localhost/entities.xml">
 
 <sites>
-	<!-- Сайт матчится по началу урла - хост и путь (если есть, без закрывающего слэша) -->
+	<!-- Сайт матчится по началу урла - хост и путь (если есть, с закрывающем слэшом) -->
 	<!-- Если ни один указанный сайт не подходит - показываем сайт (первый), у которого @default -->
-	<site url="//www.semantic-markup.com" default="default">
+	<!-- Если у @default значение "redirect", то в случае, если сайт не найден, будет произведен редирект на сайт по-умолчанию -->
+	<site url="http://www.semantic-markup.com/" default="redirect">
 		<!-- Пользователь может быть залогинен одновременно в нескольких базах -->
 		<users base="&DATA_DIR;/users/www"/>
 		<users base="&DATA_DIR;/users/admin"/>
@@ -19,14 +20,14 @@
 			<error code="500" type="Internal Server Error">/500/</error>
 		</errors>
 	</site>
-	<site url="//semantic-markup.com">
+	<site url="http://semantic-markup.com/">
 		<!-- Если хост должен средиректиться, то указываем параметр <redirect> -->
 		<!-- в случае @uri="keep", то сохраняем и путь до запрашиваемой страницы -->
-		<redirect site="//www.semantic-markup.com" uri="keep"/>
+		<redirect site="www.semantic-markup.com/" uri="keep"/>
 	</site>
-	<site url="//demo.semantic-markup.com">
+	<site url="http://demo.semantic-markup.com/">
 		<!-- Если указан параметр <alias>, то редирект не происходит, но страницы выдаются с другого сайта -->
-		<alias site="//www.semantic-markup.com"/>
+		<alias site="http://www.semantic-markup.com/"/>
 		<!-- Модификаторы, которые работают для всех блоков на конкретном сайте, их может быть несколько,
 		     как уровня блоков, так и меняющие контент -->
 		<modes>
@@ -34,7 +35,7 @@
 			<mode name="colors">inverted</mode>
 		</modes>
 	</site>
-	<site url="//www.semantic-markup.com/admin">
+	<site url="http://www.semantic-markup.com/admin">
 		<!-- Ограничение доступа на сайт - через польователей -->
 		<users base="&DATA_DIR;/users/admin">
 			<allow>
@@ -54,10 +55,11 @@
 	</site>
 
 	<!-- Переопределения для локальной разработки -->
-	<site url="//localhost">
-		<alias site="//www.semantic-markup.com"/>
+	<site url="http://localhost/">
+		<alias site="http://www.semantic-markup.com/"/>
 	</site>
-	<site url="//localhost/admin">
-		<alias site="//www.semantic-markup.com/admin"/>
+	<site url="http://localhost/admin/">
+		<alias site="http://www.semantic-markup.com/admin/"/>
 	</site>
+
 </sites>

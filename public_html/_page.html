@@ -5,14 +5,22 @@ users.p
 
 
 @main[][currentSite;currentUser]
-#  1. site
-$currentSite[^sites::getSite[//$env:SERVER_NAME^if($env:SERVER_PORT != 80){:$env:SERVER_PORT}$request:uri]]
+^rem{<!-- Узнаем, что это за сайт -->}
+$currentSite[^sites::getSite[http://$env:SERVER_NAME^if($env:SERVER_PORT != 80){:$env:SERVER_PORT}$form:req]]
+
+^rem{<!-- Если это не редирект, то продолжаем -->}
+^if($currentSite.iStatus != 301){
+
+	^throw[_page.html;$currentSite.sCurrentSiteUrl]
+	$currentUser[^users::getCurrentUser[$currentSite.hUserRepos]]
+
+}
 
 #  2. user & groups
 #$currentUser[^users::getCurrentUser[]]
 
 #  3. site
-$xSites[^xdoc::load[/sites.xml]]
+#$xSites[^xdoc::load[/sites.xml]]
 
 #  4. uri
 $sURI[$form:req]
